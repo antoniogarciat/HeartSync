@@ -188,8 +188,8 @@ class HeartRateActivity : AppCompatActivity() {
                 }
 
                 Log.d("ClasePruebas", "Valor bpm: $bpm")
-                isMeasuring = false // Detiene la medición
-                finish() // Finaliza esta actividad
+                isMeasuring = false 
+                finish() 
 
                 //iniciamos DiagnosisActivity
                 val intent = Intent(this, DiagnosisActivity::class.java)
@@ -209,7 +209,7 @@ class HeartRateActivity : AppCompatActivity() {
         }
         val newList = ArrayList<Double>(list)
         while (newList.size < powerOfTwo) {
-            newList.add(0.0) // Rellenar con ceros
+            newList.add(0.0)
         }
         return newList
     }
@@ -332,20 +332,16 @@ class HeartRateActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val MINIMUM_DATA_SIZE = 256 // Un ejemplo de tamaño mínimo de datos
+        private const val MINIMUM_DATA_SIZE = 256
     }
 
     fun createCsvFile(context: Context, userId: String, redAvgList: ArrayList<Double>, timeQueue: ArrayList<Long>, rrIntervals: ArrayList<Double>) {
         val fileName = "heart_rate_data.csv"
         val file = File(context.filesDir, fileName)
         file.printWriter().use { out ->
-            // Escribir UID del usuario en el archivo
+            
             out.println("UserID,$userId")
-
-            // Escribir encabezados del CSV
             out.println("Timestamp,RedAverage,RRInterval")
-
-            // Escribir datos
             for (i in redAvgList.indices) {
                 val timestamp = timeQueue.getOrNull(i) ?: ""
                 val redAvg = redAvgList.getOrNull(i) ?: ""
