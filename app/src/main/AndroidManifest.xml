@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/app_logo"
+        android:label="HeartSync"
+        android:roundIcon="@drawable/logo_circular"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Dashboard"
+        tools:targetApi="31">
+
+        <activity android:name=".Settings.SettingsActivity"></activity>
+
+        <activity android:name=".User.ModifyPassword"></activity>
+
+        <activity android:name=".User.UserSignup"></activity>
+
+        <activity android:name=".Settings.AppInfo"></activity>
+
+        <activity android:name=".User.UserLogin"></activity>
+
+        <activity android:name=".HeartRate.HrvActivity"></activity>
+
+
+        <activity
+            android:name=".Extras.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name="com.example.dashboard.pantallas.MainActivity"
+            android:label="Menu principal">
+        </activity>
+       <activity
+           android:name=".User.UserInfo"
+           android:label="Pantalla user"/>
+
+        <activity android:name=".HeartRate.HeartRateActivity"
+            android:label="Pantalla user" />
+
+        <activity android:name=".HeartRate.DiagnosisActivity"
+            android:label="Pantalla resultados y diagnosis" />
+
+        <activity android:name=".Statistics.StatsActivity"
+            android:label="Pantalla estadisticas" />
+
+    </application>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+</manifest>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "408043999329",
+    "project_id": "heartsync-d9c8f",
+    "storage_bucket": "heartsync-d9c8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408043999329:android:af0f8a77115b2fbd821a20",
+        "android_client_info": {
+          "package_name": "com.example.heartsync"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408043999329-89magocsv6opptih3v0u08irthrtq3ug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRNkdFRYCjoP1OD4htDgOtThA6OuppnTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408043999329-89magocsv6opptih3v0u08irthrtq3ug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

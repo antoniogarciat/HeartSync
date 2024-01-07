@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <View
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/bg_title" />
+
+    <TextView
+        android:id="@+id/settings_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/settings_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Here you can modify some aspects of the app"
+        android:textColor="#3B4F5C"
+        android:layout_below="@id/settings_title"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/settings_description"
+        android:layout_marginTop="60dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/modify_user_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modify user information"
+                android:textSize="15sp"
+                android:padding="16dp"
+                android:textColor="#000"
+                android:background="@color/light_blue"
+                android:drawableLeft="@drawable/ic_edit"
+                android:drawablePadding="10dp"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/modify_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modify password"
+                android:textSize="15sp"
+                android:padding="16dp"
+                android:textColor="#000"
+                android:background="@color/light_blue"
+                android:drawableLeft="@drawable/ic_lock"
+                android:drawablePadding="10dp"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/delete_file"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete CSV file"
+                android:textSize="15sp"
+                android:padding="16dp"
+                android:textColor="#000"
+                android:background="@color/light_blue"
+                android:drawableLeft="@drawable/ic_delete_file"
+                android:drawablePadding="10dp"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/app_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About the app"
+                android:textSize="15sp"
+                android:padding="16dp"
+                android:textColor="#000"
+                android:background="@color/light_blue"
+                android:drawableLeft="@drawable/ic_param"
+                android:drawablePadding="10dp"
+                />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

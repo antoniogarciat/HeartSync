@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:id="@+id/surfaceViewContainer"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/circular_mask"/>
+    </FrameLayout>
+
+    <ProgressBar
+        android:id="@+id/circularProgressBar"
+        android:layout_width="220dp"
+        android:layout_height="203dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/circular_progress_bar" />
+
+
+    <Button
+        android:id="@+id/buttonStartMeasure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start measuring"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/surfaceViewContainer"
+        android:layout_marginTop="20dp"/>
+
+
+    <TextView
+        android:id="@+id/instructionsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonStartMeasure"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Instructions: \n\t1. Position your finger over the camera and flash.\n\t2. Press Start measuring button. \n\t3. Remain still for a few seconds.\n\t4. Select your activity state as 'Resting' or 'Active'.\n\t5. Check your heart rate.\n\t6. Save or repeat the measurement."
+        android:textSize="14sp"/>
+
+</RelativeLayout>
+
