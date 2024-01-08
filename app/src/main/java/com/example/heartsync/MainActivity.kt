@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Forzamos modo claro
+        // Forzamos modo claro de la app para evitar incompatibilidades
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         super.onCreate(savedInstanceState)
@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity() {
 
         // Comprueba si el usuario ya está autenticado
         if (FirebaseAuth.getInstance().currentUser != null) {
-            // El usuario ya está autenticado, puede ir directamente a la pantalla principal
-            // Aquí podrías recuperar datos adicionales del usuario si es necesario
+            // Usuario ya autenticado, va directamente a pantalla principal
+            
         } else {
-            // El usuario no está autenticado, mostrar diálogo de primera ejecución
+            // Usuario no autenticado, mostrar diálogo bienvenida
             checkFirstRun()
         }
     }
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             // Mostrar el diálogo si es la primera vez
             showFirstRunDialog()
 
-            // Después de mostrar el diálogo, establecer isFirstRun a false
+            // Después de mostrar el diálogo, isFirstRun = false
             sharedPref.edit().putBoolean("isFirstRun", false).apply()
         }
     }
