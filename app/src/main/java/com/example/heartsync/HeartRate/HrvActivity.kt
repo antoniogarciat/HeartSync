@@ -16,11 +16,11 @@ class HrvActivity : AppCompatActivity() {
 
         val backButton = findViewById<Button>(R.id.backButton)
         backButton.setOnClickListener {
-            // Inicia DiagnosisActivity
+            //Inicio de DiagnosisActivity
             val intent = Intent(this, DiagnosisActivity::class.java)
             intent.putExtra("COMING_FROM_HRV_DATA", true)
             startActivity(intent)
-            // Opcionalmente, termina esta actividad si ya no es necesaria
+            //Termina la actividad si ya no es necesaria
             finish()
         }
 
@@ -38,7 +38,7 @@ class HrvActivity : AppCompatActivity() {
         val nn20 = sharedPref.getFloat("NN20", 0f)
         val pnn20 = sharedPref.getFloat("pNN20", 0f)
 
-        // Actualizamos la UI con los datos
+        //Actualizamos la interfaz con los datos
         findViewById<TextView>(R.id.sdsd_info).text = "SDSD: ${roundToTwoDecimals(sdsd)} ms"
         findViewById<TextView>(R.id.sdnn_info).text = "SDNN: ${roundToTwoDecimals(sdnn)} ms"
         findViewById<TextView>(R.id.rmssd_info).text = "RMSSD: ${roundToTwoDecimals(rmssd)} ms"
