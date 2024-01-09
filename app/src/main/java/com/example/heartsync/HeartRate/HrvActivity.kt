@@ -43,7 +43,7 @@ class HrvActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.sdnn_info).text = "SDNN: ${roundToTwoDecimals(sdnn)} ms"
         findViewById<TextView>(R.id.rmssd_info).text = "RMSSD: ${roundToTwoDecimals(rmssd)} ms"
         findViewById<TextView>(R.id.pnn50_info).text = "pNN50: ${roundToTwoDecimals(pnn50)}%"
-        findViewById<TextView>(R.id.pnn20_info).text = "pNN50: ${roundToTwoDecimals(pnn20)}%"
+        findViewById<TextView>(R.id.pnn20_info).text = "pNN20: ${roundToTwoDecimals(pnn20)}%"
         findViewById<TextView>(R.id.nn20_info).text = "NN20: ${roundToTwoDecimals(nn20)} ms"
         findViewById<TextView>(R.id.nn50_info).text = "NN50: ${roundToTwoDecimals(nn50)} ms"
     }
