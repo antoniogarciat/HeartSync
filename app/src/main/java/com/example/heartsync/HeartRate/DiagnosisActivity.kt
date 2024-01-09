@@ -27,6 +27,7 @@ class DiagnosisActivity : AppCompatActivity() {
 
         //get la frecuencia cardiaca de SharedPreferences
         val sharedPref = getSharedPreferences("AppData", Context.MODE_PRIVATE)
+        Log.d("DiagnosisActivity", "Antes de actualizar - Heart Rate: ${sharedPref.getInt("HEART_RATE", 0)}")
         val heartRate = sharedPref.getInt("HEART_RATE", 0)
 
         val sdnn = sharedPref.getFloat("SDNN", 0f)
@@ -96,32 +97,26 @@ class DiagnosisActivity : AppCompatActivity() {
 
     private fun getDiagnosis(heartRate: Int, age: Int, activityState: String): String {
         val maxHeartRate = 220 - age
-        val lowerBound = maxHeartRate * 50 / 100
-        val upperBound = if (activityState == "active") maxHeartRate * 85 / 100
-        else maxHeartRate * 70 / 100
 
-        return when {
-            heartRate < lowerBound -> {
-                if (activityState == "active") {
-                    "Your heart rate is below the target zone for physical activity. Consider increasing your exercise intensity."
-                } else {
-                    "Your heart rate is below the normal resting range. If you frequently experience a low resting heart rate, consult a healthcare professional."
+        return when (activityState) {
+            "active" -> {
+                val lowerBound = maxHeartRate * 50 / 100
+                val upperBound = maxHeartRate * 85 / 100
+
+                when {
+                    heartRate < lowerBound -> "Your heart rate is below the target zone for physical activity. Consider increasing your exercise intensity."
+                    heartRate in lowerBound..upperBound -> "Your heart rate is within the target zone for physical activity. This is a good intensity level for your age."
+                    else -> "Your heart rate is above the target zone for physical activity. Consider slowing down a bit, especially if you feel any discomfort."
                 }
             }
-            heartRate in lowerBound..upperBound -> {
-                if (activityState == "active") {
-                    "Your heart rate is within the target zone for physical activity. This is a good intensity level for your age."
-                } else {
-                    "Your resting heart rate is within a normal range."
+            "resting" -> {
+                when {
+                    heartRate < 60 -> "Your resting heart rate is below normal. If you frequently experience a low resting heart rate, consult a healthcare professional."
+                    heartRate in 60..100 -> "Your resting heart rate is within a normal range."
+                    else -> "Your resting heart rate is higher than normal. If this occurs frequently, it's advisable to seek medical advice."
                 }
             }
-            else -> {
-                if (activityState == "active") {
-                    "Your heart rate is above the target zone for physical activity. Consider slowing down a bit, especially if you feel any discomfort."
-                } else {
-                    "Your resting heart rate is higher than normal. If this occurs frequently, it's advisable to seek medical advice."
-                }
-            }
+            else -> "Unable to determine the diagnosis without activity state."
         }
     }
 

@@ -188,8 +188,8 @@ class HeartRateActivity : AppCompatActivity() {
                 }
 
                 Log.d("ClasePruebas", "Valor bpm: $bpm")
-                isMeasuring = false 
-                finish() 
+                isMeasuring = false // Detiene la medición
+                finish() // Finaliza esta actividad
 
                 //iniciamos DiagnosisActivity
                 val intent = Intent(this, DiagnosisActivity::class.java)
@@ -209,7 +209,7 @@ class HeartRateActivity : AppCompatActivity() {
         }
         val newList = ArrayList<Double>(list)
         while (newList.size < powerOfTwo) {
-            newList.add(0.0)
+            newList.add(0.0) // Rellenar con ceros
         }
         return newList
     }
@@ -332,46 +332,8 @@ class HeartRateActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val MINIMUM_DATA_SIZE = 256
+        private const val MINIMUM_DATA_SIZE = 256 // Un ejemplo de tamaño mínimo de datos
     }
-
-    fun createCsvFile(context: Context, userId: String, redAvgList: ArrayList<Double>, timeQueue: ArrayList<Long>, rrIntervals: ArrayList<Double>) {
-        val fileName = "heart_rate_data.csv"
-        val file = File(context.filesDir, fileName)
-        file.printWriter().use { out ->
-            
-            out.println("UserID,$userId")
-            out.println("Timestamp,RedAverage,RRInterval")
-            for (i in redAvgList.indices) {
-                val timestamp = timeQueue.getOrNull(i) ?: ""
-                val redAvg = redAvgList.getOrNull(i) ?: ""
-                val rrInterval = rrIntervals.getOrNull(i) ?: ""
-                out.println("$timestamp,$redAvg,$rrInterval")
-            }
-        }
-    }
-
-    fun uploadCsvToFirebase(context: Context) {
-        val fileName = "heart_rate_data.csv"
-        val file = File(context.filesDir, fileName)
-
-        if (file.exists()) {
-            val storageReference = Firebase.storage.reference
-            val currentUser = FirebaseAuth.getInstance().currentUser
-            val userId = currentUser?.uid ?: "User_not_identified"
-            val csvRef = storageReference.child("csv/$userId/$fileName")
-
-            val uploadTask = csvRef.putFile(Uri.fromFile(file))
-            uploadTask.addOnSuccessListener {
-                Toast.makeText(context, "CSV was uploaded", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener {
-                Toast.makeText(context, "Error uploading CSV: ${it.message}", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            Toast.makeText(context, "CSV file not found", Toast.LENGTH_SHORT).show()
-        }
-    }
-
 
 }
 

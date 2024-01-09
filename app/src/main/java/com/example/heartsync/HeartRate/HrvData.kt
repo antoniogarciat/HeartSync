@@ -41,13 +41,23 @@ class HrvData {
     }
 
     fun calculateSDSD(rrIntervals: ArrayList<Double>): Double {
-        var sumOfSquares = 0.0
+        if (rrIntervals.size <= 1) return 0.0
+
+        val diffList = ArrayList<Double>()
         for (i in 0 until rrIntervals.size - 1) {
             val diff = rrIntervals[i + 1] - rrIntervals[i]
-            sumOfSquares += diff.pow(2)
+            diffList.add(diff)
         }
-        return sqrt(sumOfSquares / (rrIntervals.size - 1))
+
+        val mean = diffList.average()
+        var sumOfSquares = 0.0
+        for (diff in diffList) {
+            sumOfSquares += (diff - mean).pow(2)
+        }
+
+        return sqrt(sumOfSquares / (diffList.size - 1))
     }
+
 
     fun calculateNN50(rrInterval: ArrayList<Double>): Int {
         var count = 0

@@ -7,6 +7,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.heartsync.R
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 
 class ModifyPassword : AppCompatActivity() {
 
@@ -30,26 +32,32 @@ class ModifyPassword : AppCompatActivity() {
                 Toast.makeText(this, "New passwords do not match", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val currentPasswordd = currentPasswordEditText.text.toString()
-            val savedPassword = sharedPref.getString("USER_PASSWORD", "default")
 
-            Log.d("ModifyPassword", "Current password (input): $currentPasswordd")
-            Log.d("ModifyPassword", "Saved password (sharedPref): $savedPassword")
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+            val email = firebaseUser?.email ?: ""
 
-            if (currentPassword != sharedPref.getString("USER_PASSWORD", "")) {
-
-                Toast.makeText(this, "Current password is incorrect", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            // reautenticar usuario
+            val credential = EmailAuthProvider.getCredential(email, currentPassword)
+            firebaseUser?.reauthenticate(credential)?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // actualizamos valor contraseña en Firebase Authentication
+                    firebaseUser.updatePassword(newPassword).addOnCompleteListener { updateTask ->
+                        if (updateTask.isSuccessful) {
+                            Toast.makeText(this, "Password updated successfully", Toast.LENGTH_SHORT).show()
+                            // actualizamos valor en SharedPreferences
+                            with(sharedPref.edit()) {
+                                putString("USER_PASSWORD", newPassword)
+                                apply()
+                            }
+                            finish()
+                        } else {
+                            Toast.makeText(this, "Failed to update password", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Current password is incorrect", Toast.LENGTH_SHORT).show()
+                }
             }
-
-            //Guardamos la nueva contraseña
-            with(sharedPref.edit()) {
-                putString("USER_PASSWORD", newPassword)
-                apply()
-            }
-
-            Toast.makeText(this, "Password updated successfully", Toast.LENGTH_SHORT).show()
-            finish()
         }
     }
 }

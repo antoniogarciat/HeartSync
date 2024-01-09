@@ -1,11 +1,13 @@
 package com.example.dashboard.pantallas
 
+import android.Manifest
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
 import com.example.heartsync.HeartRate.HeartRateActivity
 import com.example.heartsync.R
 import com.example.heartsync.Settings.SettingsActivity
@@ -17,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Forzamos modo claro de la app para evitar incompatibilidades
+        // Forzamos modo claro para evitar problemas de compatibilidad
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         super.onCreate(savedInstanceState)
@@ -51,8 +53,8 @@ class MainActivity : AppCompatActivity() {
 
         // Comprueba si el usuario ya está autenticado
         if (FirebaseAuth.getInstance().currentUser != null) {
-            // Usuario ya autenticado, va directamente a pantalla principal
-            
+            // Usuario ya autenticado, redigirido a pantalla principal
+
         } else {
             // Usuario no autenticado, mostrar diálogo bienvenida
             checkFirstRun()
@@ -64,11 +66,12 @@ class MainActivity : AppCompatActivity() {
         val isFirstRun = sharedPref.getBoolean("isFirstRun", true)
 
         if (isFirstRun) {
-            // Mostrar el diálogo si es la primera vez
+            // Mostrar diálogo si es primera vez
             showFirstRunDialog()
 
-            // Después de mostrar el diálogo, isFirstRun = false
+            // Después de mostrar diálogo, isFirstRun=false
             sharedPref.edit().putBoolean("isFirstRun", false).apply()
+            requestPermissions()
         }
     }
 
@@ -87,4 +90,22 @@ class MainActivity : AppCompatActivity() {
             .setCancelable(false)
             .show()
     }
+
+    private fun requestPermissions() {
+        val permissions = arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+
+        ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    companion object {
+        private const val PERMISSION_REQUEST_CODE = 1
+    }
+
 }
