@@ -99,7 +99,7 @@ class DiagnosisActivity : AppCompatActivity() {
         val maxHeartRate = 220 - age
 
         return when (activityState) {
-            "active" -> {
+            "Active" -> {
                 val lowerBound = maxHeartRate * 50 / 100
                 val upperBound = maxHeartRate * 85 / 100
 
@@ -109,7 +109,7 @@ class DiagnosisActivity : AppCompatActivity() {
                     else -> "Your heart rate is above the target zone for physical activity. Consider slowing down a bit, especially if you feel any discomfort."
                 }
             }
-            "resting" -> {
+            "Resting" -> {
                 when {
                     heartRate < 60 -> "Your resting heart rate is below normal. If you frequently experience a low resting heart rate, consult a healthcare professional."
                     heartRate in 60..100 -> "Your resting heart rate is within a normal range."
